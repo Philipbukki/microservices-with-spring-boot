@@ -2,6 +2,7 @@ package com.pbukki.accounts.controller;
 
 import com.pbukki.accounts.constants.AccountsConstants;
 import com.pbukki.accounts.dto.AccountDto;
+import com.pbukki.accounts.dto.AccountsContactInfoDto;
 import com.pbukki.accounts.dto.ErrorResponseDto;
 import com.pbukki.accounts.dto.ResponseDto;
 import com.pbukki.accounts.entity.Account;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+//@AllArgsConstructor
 @RequestMapping(value = "/api/accounts",
         produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
@@ -32,8 +34,15 @@ import java.util.List;
         description = "CRUD REST api performs create, read,fetch, update and delete operations"
 )
 public class AccountController {
-
     private AccountsService accountsService;
+    private AccountsContactInfoDto accountsContactInfoDto;
+    @Value("${build.version}")
+    private String buildVersion;
+
+    public AccountController(AccountsService accountsService, AccountsContactInfoDto accountsContactInfoDto){
+        this.accountsService = accountsService;
+        this.accountsContactInfoDto = accountsContactInfoDto;
+    }
     @Operation(
             summary = "Create Account API",
             description = "Creates a new Account in Account's Microservice"
@@ -119,6 +128,34 @@ public class AccountController {
                     .body(new ResponseDto(AccountsConstants.STATUS_500,AccountsConstants.MESSAGE_500));
         }
 
+    }
+    @Operation(
+            summary = "Account Api build Version",
+            description = "Returns build version of Account's Microservice"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP STATUS OK"
+    )
+    @GetMapping("/build-version")
+    public ResponseEntity<String> getBuildVersion(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildVersion);
+    }
+    @Operation(
+            summary = "Account Api contact info",
+            description = "Returns contact info of Account's Microservice"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP STATUS OK"
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo(){
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
     }
 
 }

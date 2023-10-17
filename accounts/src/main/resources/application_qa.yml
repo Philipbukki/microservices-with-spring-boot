@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "3.0"
+accounts:
+  message: "Welcome to Pbukki accounts related qa APIs "
+  contactDetails:
+    name: "Will Smith - QA-Lead"
+    email: "will.smith@gmail.com"
+  onCallSupport:
+    - +254-798-335-550
+    - +254-101-080-341

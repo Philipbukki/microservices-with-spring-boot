@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9000
 spring:
   datasource:
     password: ''
@@ -14,3 +14,23 @@ spring:
   h2:
     console:
       enabled: true
+  config:
+    import:
+      - "application_prod.yml"
+      - "application_qa.yml"
+  profiles:
+    active:
+      - "qa"
+
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to Pbukki cards related da APIs "
+  contactDetails:
+    name: "Philip Bukki - QA Lead"
+    email: "phil.bukki@gmail.com"
+  onCallSupport:
+    - +254-798-335-550
+    - +254-101-080-341
+
