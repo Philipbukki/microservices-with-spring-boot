@@ -1,10 +1,11 @@
-build:
-  version: "1.0"
 
-cards:
-  message: "Welcome to Pbukki cards related default APIs "
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to Pbukki loans related prod APIs "
   contactDetails:
-    name: "Philip Bukki - QA Lead"
+    name: "Philip Bukki - Product Owner"
     email: "phil.bukki@gmail.com"
   onCallSupport:
     - +254-798-335-550

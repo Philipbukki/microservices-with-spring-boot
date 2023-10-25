@@ -2,6 +2,8 @@ server:
   port: 8040
 
 spring:
+  application:
+    name: "loans"
   datasource:
     password: ''
     url: jdbc:h2:mem:testdb
@@ -16,21 +18,23 @@ spring:
     console:
       enabled: true
   config:
-    import:
-      - "application_prod.yml"
-      - "application_qa.yml"
+    import: "optional:configserver:http://localhost:8071/"
   profiles:
     active:
       - "qa"
-build:
-  version: "1.0"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    password: "guest"
+    username: "guest"
 
-loans:
-  message: "Welcome to Pbukki loans related prod APIs "
-  contactDetails:
-    name: "Philip Bukki - Product Owner"
-    email: "phil.bukki@gmail.com"
-  onCallSupport:
-    - +254-798-335-550
-    - +254-101-080-341
+#for spring boot actuator endpoints to be enabled
+#after which we invoke the refresh endpoint on the individual microservices
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
 

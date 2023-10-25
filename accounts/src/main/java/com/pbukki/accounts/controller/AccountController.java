@@ -21,7 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -34,8 +33,8 @@ import java.util.List;
         description = "CRUD REST api performs create, read,fetch, update and delete operations"
 )
 public class AccountController {
-    private AccountsService accountsService;
-    private AccountsContactInfoDto accountsContactInfoDto;
+    private final AccountsService accountsService;
+    private final AccountsContactInfoDto accountsContactInfoDto;
     @Value("${build.version}")
     private String buildVersion;
 

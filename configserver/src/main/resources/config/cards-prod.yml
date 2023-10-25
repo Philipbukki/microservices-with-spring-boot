@@ -2,7 +2,7 @@ build:
   version: "2.0"
 
 cards:
-  message: "Welcome to Pbukki cards related prod APIs "
+  message: "Welcome to pbukki cards related prod APIs "
   contactDetails:
     name: "Philip Bukki - Developer"
     email: "phil.bukki@gmail.com"

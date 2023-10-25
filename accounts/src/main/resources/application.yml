@@ -1,7 +1,11 @@
 server:
   port: 8070
-
 spring:
+  application:
+    name: "accounts"
+  profiles:
+    active:
+      - "qa"
   datasource:
     password: ''
     url: jdbc:h2:mem:testdb
@@ -15,26 +19,25 @@ spring:
   h2:
    console:
      enabled: true
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    password: "guest"
+    username: "guest"
+
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
-  profiles:
-    active:
-    - "qa"
+#    import configuration from the config server
+
+    import: "optional:configserver:http://localhost:8071/"
+
+#    for spring boot actuator endpoints to be enabled
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 
-build:
-  version: "1.0"
-
-accounts:
-  message: "Welcome to Pbukki accounts related prod APIs "
-  contactDetails:
-    name: "Philip Bukki - Product Owner"
-    email: "phil.bukki@gmail.com"
-  onCallSupport:
-    - +254-798-335-550
-    - +254-101-080-341
 
 
 

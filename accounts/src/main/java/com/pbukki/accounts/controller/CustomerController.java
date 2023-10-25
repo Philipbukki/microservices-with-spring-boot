@@ -3,7 +3,6 @@ package com.pbukki.accounts.controller;
 import com.pbukki.accounts.constants.AccountsConstants;
 import com.pbukki.accounts.dto.CustomerDto;
 import com.pbukki.accounts.dto.ResponseDto;
-import com.pbukki.accounts.entity.Account;
 import com.pbukki.accounts.entity.Customer;
 import com.pbukki.accounts.service.CustomersService;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
