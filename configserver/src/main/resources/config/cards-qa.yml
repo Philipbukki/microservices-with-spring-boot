@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+cards:
+  message: "Welcome to pbukki cards related qa APIs "
+  contactDetails:
+    name: "Evans Kibe - QA Lead"
+    email: "evans.kibe@gmail.com"
+  onCallSupport:
+    - +254-798-335-550
+    - +254-101-080-341

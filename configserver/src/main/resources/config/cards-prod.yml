@@ -1,15 +1,10 @@
-spring:
-  config:
-    activate:
-      on-profile: "qa"
-
 build:
-  version: "3.0"
+  version: "2.0"
 
 cards:
   message: "Welcome to Pbukki cards related prod APIs "
   contactDetails:
-    name: "Philip Bukki - QA Lead"
+    name: "Philip Bukki - Developer"
     email: "phil.bukki@gmail.com"
   onCallSupport:
     - +254-798-335-550
