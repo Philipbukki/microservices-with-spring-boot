@@ -1,16 +1,25 @@
 package com.pbukki.accounts.service;
 
+import com.pbukki.accounts.dto.AccountDto;
+import com.pbukki.accounts.dto.CardDto;
+import com.pbukki.accounts.dto.CustomerDetailsDto;
 import com.pbukki.accounts.dto.CustomerDto;
+import com.pbukki.accounts.entity.Account;
 import com.pbukki.accounts.entity.Customer;
 import com.pbukki.accounts.exceptions.ResourceNotFoundException;
+import com.pbukki.accounts.mapper.AccountsMapper;
 import com.pbukki.accounts.mapper.CustomersMapper;
+import com.pbukki.accounts.repository.AccountsRepository;
 import com.pbukki.accounts.repository.CustomersRepository;
+import com.pbukki.accounts.service.client.CardsFeignClient;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -21,6 +30,28 @@ import static java.util.Arrays.stream;
 public class CustomersServiceImpl implements CustomersService{
 
     private CustomersRepository customersRepository;
+    private AccountsRepository accountsRepository;
+    private CardsFeignClient cardsFeignClient;
+
+    @Override
+    public CustomerDetailsDto fetchCustomerDetails(String mobileNumber) {
+
+        Customer customer = customersRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                ()-> new ResourceNotFoundException("Customer","mobileNumber",1)
+        );
+
+        Account account = accountsRepository.findById(1).orElseThrow(
+                ()-> new ResourceNotFoundException("Account","mobileNumber",customer.getCustomerId())
+        );
+        ResponseEntity<CardDto> cardDto = cardsFeignClient.fetchCardDetails(mobileNumber);
+
+        CustomerDetailsDto customerDetails = CustomersMapper.mapToCustomerDetailsDto(customer,new CustomerDetailsDto());
+        customerDetails.setAccountDto(AccountsMapper.mapToDto(account));
+        customerDetails.setCardDto(cardDto.getBody());
+
+        return customerDetails;
+    }
+
     @Override
     public void createCustomer(CustomerDto customerDto) {
          Customer customer = new Customer();

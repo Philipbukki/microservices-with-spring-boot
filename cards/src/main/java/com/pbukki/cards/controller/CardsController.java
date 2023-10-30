@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 //@AllArgsConstructor
-@RequestMapping(value = "/api/cards", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/api/cards/", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Tag(
         name="CRUD REST api for Card's Microservice",
         description = "CRUD REST api performs create, read,fetch, update and delete operations"
@@ -64,7 +64,7 @@ public class CardsController {
             responseCode = "200",
             description = "HTTP STATUS OK"
     )
-    @GetMapping("mobileNumber/")
+    @GetMapping("mobileNumber")
     public ResponseEntity<CardDto> fetchCardDetails(@RequestParam("mobileNumber") String mobileNumber) {
         CardDto cardsDto = cardService.getCard(mobileNumber);
         return ResponseEntity
@@ -133,7 +133,7 @@ public class CardsController {
             responseCode = "200",
             description = "HTTP STATUS OK"
     )
-    @GetMapping("/contact-info")
+    @GetMapping("contact-info")
     public ResponseEntity<CardsContactDto> getContactInfo(){
 
         return ResponseEntity
@@ -141,7 +141,7 @@ public class CardsController {
                 .body(cardsContactDto);
     }
 
-    @GetMapping("/build-version")
+    @GetMapping("build-version")
     public ResponseEntity<String> getBuildVersion(){
         return ResponseEntity
                 .status(HttpStatus.OK)

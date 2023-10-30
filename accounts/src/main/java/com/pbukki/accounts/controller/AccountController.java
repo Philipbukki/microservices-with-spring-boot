@@ -6,6 +6,7 @@ import com.pbukki.accounts.dto.AccountsContactInfoDto;
 import com.pbukki.accounts.dto.ErrorResponseDto;
 import com.pbukki.accounts.dto.ResponseDto;
 import com.pbukki.accounts.entity.Account;
+import com.pbukki.accounts.mapper.AccountsMapper;
 import com.pbukki.accounts.service.AccountsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -59,9 +60,9 @@ public class AccountController {
     }
 
     @GetMapping("/{accountNumber}")
-    public ResponseEntity<Account> getAccount(@PathVariable("accountNumber") int accountNumber){
+    public ResponseEntity<AccountDto> getAccount(@PathVariable("accountNumber") int accountNumber){
         Account account = accountsService.findById(accountNumber);
-        return ResponseEntity.ok(account);
+        return ResponseEntity.ok(AccountsMapper.mapToDto(account));
     }
 
     @GetMapping
