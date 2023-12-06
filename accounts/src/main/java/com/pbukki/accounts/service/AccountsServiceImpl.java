@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 import static com.pbukki.accounts.mapper.AccountsMapper.mapToDto;
 import static com.pbukki.accounts.mapper.AccountsMapper.mapToEntity;
 
@@ -48,6 +49,7 @@ public class AccountsServiceImpl implements AccountsService{
 
         Account updatedAccount= accountsRepository.findById(accountId).orElseThrow(
                 ()->new ResourceNotFoundException("Account","accountId",accountId));
+
         updatedAccount.setAccountNumber(accountDto.getAccountNumber());
         updatedAccount.setBranchAddress(accountDto.getBranchAddress());
         updatedAccount.setAccountNumber(accountDto.getAccountNumber());
